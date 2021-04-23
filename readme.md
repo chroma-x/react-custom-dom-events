@@ -51,11 +51,11 @@ import { emitCustomDomEvent } from 'react-custom-dom-events';
 const emittingElement = useRef(null);
 
 const handleClick = (): void => {
-	emitCustomDomEvent(emittingElement, 'myCustomEvent');
+  emitCustomDomEvent(emittingElement, 'myCustomEvent');
 };
 
 return (
-	<button ref={emittingElement} onClick={handleClick}>Emit custom event</button>
+  <button ref={emittingElement} onClick={handleClick}>Emit custom event</button>
 );
 ```
 
@@ -69,9 +69,9 @@ Custom event options
 
 ```typescript
 emitCustomEvent<string>(emittingElement, 'myCustomEvent', 'Event payload', {
-	bubbles: true,
-	cancelable: true,
-	composed: true
+  bubbles: true,
+  cancelable: true, 
+  composed: true
 });
 ```
 
@@ -89,12 +89,12 @@ import { useCustomDomEventListener } from 'react-custom-dom-events';
 const listenerElement = useRef(null);
 
 useCustomDomEventListener<string>(listenerElement, 'myCustomEvent', (event): void => {
-	event.stopPropagation();
-	console.debug(event.detail);
+  event.stopPropagation();
+  console.debug(event.detail);
 });
 
 return (
-	<div ref ={listenerElement} />
+  <div ref ={listenerElement} />
 );
 ```
 
