@@ -1,6 +1,6 @@
 import { MutableRefObject, RefObject, useEffect } from 'react';
 
-export interface TypedCustomEvent<T> extends CustomEvent {
+export interface TypedCustomDomEvent<T> extends CustomEvent {
     detail: T;
 }
 
@@ -13,10 +13,10 @@ function unwrapDomElement(element: HTMLElement | RefObject<HTMLElement> | Mutabl
     return isRef(element) ? element.current : element;
 }
 
-export function useCustomEventListener<T = any>(
+export function useCustomDomEventListener<T = any>(
     listenerTarget: HTMLElement | RefObject<HTMLElement> | MutableRefObject<HTMLElement>,
     event: string,
-    eventHandler: (event: TypedCustomEvent<T>) => void,
+    eventHandler: (event: TypedCustomDomEvent<T>) => void,
     options?: AddEventListenerOptions
 ): void {
     useEffect(() => {
@@ -26,7 +26,7 @@ export function useCustomEventListener<T = any>(
         }
 
         const handleEvent = (customEvent: CustomEvent | Event) => {
-            eventHandler(customEvent as TypedCustomEvent<T>);
+            eventHandler(customEvent as TypedCustomDomEvent<T>);
         };
 
         const listenerOptions: AddEventListenerOptions | false = options ?? false;
@@ -38,7 +38,7 @@ export function useCustomEventListener<T = any>(
     });
 }
 
-export function emitCustomEvent<T = any>(
+export function emitCustomDomEvent<T = any>(
     eventTarget: HTMLElement | RefObject<HTMLElement> | MutableRefObject<HTMLElement>,
     event: string,
     payload?: T,
