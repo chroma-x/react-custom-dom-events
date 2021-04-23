@@ -1,6 +1,6 @@
 {
 	"name": "@chroma-x/react-custom-dom-events",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Easily integrate custom DOM events in React functional components",
 	"main": "dist/index.js",
 	"scripts": {
