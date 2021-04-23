@@ -46,7 +46,7 @@ The emitting element could be a `RefObject<HTMLElement>`, `MutableRefObject<HTML
 
 ```typescript
 import { useRef } from 'react';
-import { emitCustomDomEvent } from 'react-custom-dom-events';
+import { emitCustomDomEvent } from '@chroma-x/react-custom-dom-events';
 
 const emittingElement = useRef(null);
 
@@ -84,7 +84,7 @@ and so on. The payload is as usual part of the event as the member `detail`.
 
 ```typescript
 import { useRef } from 'react';
-import { useCustomDomEventListener } from 'react-custom-dom-events';
+import { useCustomDomEventListener } from '@chroma-x/react-custom-dom-events';
 
 const listenerElement = useRef(null);
 
