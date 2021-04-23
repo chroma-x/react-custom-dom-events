@@ -32,15 +32,15 @@ bubble through the DOM tree – which usually represents your component hirarchi
 
 So the handling and orchestration is already provided by the native behavior of custom DOM events. No need to reinvent the logic behind that.
 
-### How to use
+## How to use
 
-##### Installation
+### Installation
 
 ```sh
 npm i react-custom-dom-events
 ```
 
-##### Event emission
+### Event emission
 
 The emitting element could be a `RefObject<HTMLElement>`, `MutableRefObject<HTMLElement>` or a `HTMLElement`.
 
@@ -75,7 +75,7 @@ emitCustomEvent<string>(emittingElement, 'myCustomEvent', 'Event payload', {
 });
 ```
 
-##### Event listening
+### Event listening
 
 The listening element could be a `RefObject<HTMLElement>`, `MutableRefObject<HTMLElement>` or a `HTMLElement`.
 
@@ -112,7 +112,7 @@ const removeListener = useCustomDomEventListener<string>(listenerElement, 'myCus
 });
 
 const handleClick = (): void => {
-	removeListener();
+  removeListener();
 };
 
 return (
