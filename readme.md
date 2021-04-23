@@ -98,6 +98,30 @@ return (
 );
 ```
 
+`useCustomDomEventListener` returns a closure that allows you to remove the added event listener if required. 
+
+```typescript
+import { useRef } from 'react';
+import { useCustomDomEventListener } from '@chroma-x/react-custom-dom-events';
+
+const listenerElement = useRef(null);
+
+const removeListener = useCustomDomEventListener<string>(listenerElement, 'myCustomEvent', (event): void => {
+  event.stopPropagation();
+  console.debug(event.detail);
+});
+
+const handleClick = (): void => {
+	removeListener();
+};
+
+return (
+  <div ref={listenerElement}>
+    <button onClick={handleClick}>Remove event listener</button>
+  </div>
+);
+```
+
 `useCustomDomEventListener` makes use of the useEffect hook, so it can be used in functional components only.
 
 There is no need to handle the removal of the event listener. Listeners are removed on component unmount by reacts useEffect destructor.

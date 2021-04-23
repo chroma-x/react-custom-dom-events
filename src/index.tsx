@@ -18,24 +18,38 @@ export function useCustomDomEventListener<T = any>(
 	event: string,
 	eventHandler: (event: TypedCustomDomEvent<T>) => void,
 	options?: AddEventListenerOptions
-): void {
+): () => void {
+	// Prepare the handler
+	const handleEvent = (customEvent: CustomEvent | Event) => {
+		eventHandler(customEvent as TypedCustomDomEvent<T>);
+	};
+
+	// Prepare the listener options
+	const listenerOptions: AddEventListenerOptions | false = options ?? false;
+
+	// Invoke useEffect to async add the listener
 	useEffect(() => {
 		const listenerTargetElement = unwrapDomElement(listenerTarget);
 		if (listenerTargetElement === null) {
 			return;
 		}
 
-		const handleEvent = (customEvent: CustomEvent | Event) => {
-			eventHandler(customEvent as TypedCustomDomEvent<T>);
-		};
-
-		const listenerOptions: AddEventListenerOptions | false = options ?? false;
 		listenerTargetElement.addEventListener(event, handleEvent, listenerOptions);
 
+		// eslint-disable-next-line consistent-return
 		return () => {
 			listenerTargetElement.removeEventListener(event, handleEvent, listenerOptions);
 		};
 	});
+
+	// Return the listener removal closure
+	return () => {
+		const listenerTargetElement = unwrapDomElement(listenerTarget);
+		if (listenerTargetElement === null) {
+			return;
+		}
+		listenerTargetElement.removeEventListener(event, handleEvent, listenerOptions);
+	};
 }
 
 export function emitCustomDomEvent<T = any>(
