@@ -8,20 +8,24 @@ This project is a continuation of [`react-custom-events`](https://www.npmjs.com/
 
 There are situations in which the React callback prop handling makes it impossible or at least unconvenient to handle user interactions. 
 
-Common practice is to map user interactions to a global state change that then acts as some kind of event provider or broadcaster. 
-This could work for some cases, but it introduces a strict dependency between components and the global state machine. 
+Common practice is to map user interactions to context or even worse to global state change that then acts as some kind of event provider 
+or broadcaster. This could work for most cases, but it introduces strict dependencies between components their environment. Especially in 
+situations in which you have no knowledge about the surrounding of the ui components – like ui library development – a generic and self 
+contained solution could be required.
 
-Using native custom DOM events is the better choice because components usually are already depending on the existance of the DOM and they 
-allow making use of the native behavior of DOM events like bubbling and so on. 
+Using native custom DOM events could be the better choice because components usually are already depending on the existance of the DOM and 
+they allow making use of the native behavior of DOM events like bubbling and such. 
 
 This way you can easily orchestrate event emitting and event listening components – even if there are multiple emitters or multiple 
-listeners which is hard to manage if you rely on a single global store to broadcast your state changes. 
+listeners which is hard to manage if you rely on a single context or global store to broadcast your state changes. 
 
 ## React current state
 
-The way of React handling "events" is to pass callbacks to child components. That leads to drilling callback props through the component 
-hirarchie ahether the components on the route down the hirarchie should have knowledge about these props or not. This is often avoided 
-by (ab)using [Context](https://reactjs.org/docs/context.html) which often is not what context was meant for and leads to unwanted complexity. 
+The way of React handling "events" is to pass callbacks to child components via properties. That leads to drilling callback props through 
+the component hirarchie whether the components on the route down the hirarchie should have knowledge about these props or not. This is often 
+avoided by using [Context](https://reactjs.org/docs/context.html) which could lead to unwanted complexity. Especially if you can not 
+provide the context as a part of your ui component but rely on the existance of a specific context provider in the application that utilizes 
+your components you introduce a dependency that you can not count on. 
 
 Another problem is that you often need to write callback functions that acts as some kind of orchestrator to then call different other 
 functions to resolve user interactions on multiple components. This results in unwanted coupling bewteen components and extra complexity 
