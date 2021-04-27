@@ -41,7 +41,7 @@ So the handling and orchestration is already provided by the native behavior of 
 ### Installation
 
 ```sh
-npm i react-custom-dom-events
+npm i @chroma-x/react-custom-dom-events
 ```
 
 ### Event emission
